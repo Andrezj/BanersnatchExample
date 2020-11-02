@@ -7,10 +7,11 @@ async function main() {
     const manifestJSON = await (await fetch(MANIFEST_URL)).json()
     const host = isLocal ? manifestJSON.localHost : manifestJSON.productioHost
     const videoComponent = new VideoComponent()
-    
+    const network = new Network({ host })
     
     const videoPlayer = new VideoMediaPlayer({
-        manifestJSON
+        manifestJSON,
+        network
     })
     
     videoPlayer.initializeCodec()
